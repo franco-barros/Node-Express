@@ -1,10 +1,8 @@
-const productsRouter = require('./products.router');
-// const usersRouter = require('./users.router');
+const productsRouter = require('./products.router'); // Importar el router de productos
 
+// Configurar las rutas
 function routerApi(app) {
- app.use('/products', productsRouter);
-//  app.use('/users', productsRouter);
-//  app.use('/categories', productsRouter);
+  app.use('/products', productsRouter); // Usar el router para '/products'
 }
 
 module.exports = routerApi;
