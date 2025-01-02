@@ -9,12 +9,11 @@ router.get('/', (req, res) => {
   const { size } = req.query;
   const limit = size || 10; // Número de productos a generar, por defecto 10
 
-  // Generar productos
   for (let index = 0; index < limit; index++) {
     products.push({
       name: faker.commerce.productName(),
       price: parseInt(faker.commerce.price(), 10),
-      image: `https://picsum.photos/640/480` ,
+      image: `https://picsum.photos/640/480`,
     });
   }
 
@@ -37,4 +36,3 @@ router.get('/:id', (req, res) => {
 });
 
 module.exports = router;
-

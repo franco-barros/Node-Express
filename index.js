@@ -1,10 +1,10 @@
 const express = require('express');
-const routerApi = require('./routes');  // Importar la función que define las rutas
+const routerApi = require('./routes'); // Importar la función que define las rutas
 
 const app = express();
 const port = 3000;
 
-// Definir rutas generales
+//Rutas generales
 app.get('/', (req, res) => {
   res.send('Hola, mi servidor en Express');
 });
@@ -20,4 +20,3 @@ routerApi(app);
 app.listen(port, () => {
   console.log(`Mi servidor está corriendo en el puerto ${port}`);
 });
-

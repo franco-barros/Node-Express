@@ -1,19 +1,15 @@
-app.get('/users', (req, res) => {
+const express = require('express');
+
+const router = express.Router();
+
+// Ruta para obtener usuarios con parámetros opcionales
+router.get('/', (req, res) => {
   const { limit, offset } = req.query;
   if (limit && offset) {
-    res.json({
-      limit,
-      offset,
-    });
+    res.json({ limit, offset });
   } else {
-    res.send('No hay parametros');
+    res.send('No hay parámetros');
   }
 });
 
-app.get('/categories/:categoryId/products/:productId', (req, res) => {
-  const { categoryId, productId } = req.params;
-  res.json({
-    categoryId,
-    productId,
-  });
-});
+module.exports = router;
