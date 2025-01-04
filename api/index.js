@@ -1,15 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const routerApi = require('./api/routes');
+const routerApi = require('./routes/index');
 
 const {
   logErrors,
   errorHandler,
   boomErrorHandler,
-} = require('./api/middlewares/error.handler');
+} = require('./middlewares/error.handler');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json()); // Este middleware permite procesar el cuerpo de las solicitudes JSON
 
