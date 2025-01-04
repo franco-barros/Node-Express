@@ -1,12 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const routerApi = require('./routes');
+const routerApi = require('./api/routes');
 
 const {
   logErrors,
   errorHandler,
   boomErrorHandler,
-} = require('./middlewares/error.handler');
+} = require('./api/middlewares/error.handler');
 
 const app = express();
 const port = 3000;
@@ -23,13 +23,15 @@ const option = {
     }
   },
 };
+
 app.use(cors());
+
 // Rutas generales
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Hola, mi servidor en Express');
 });
 
-app.get('/nueva-ruta', (req, res) => {
+app.get('/api/nueva-ruta', (req, res) => {
   res.send('Hola, soy una nueva ruta');
 });
 
