@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const routerApi = require('./routes');
 
 const {
@@ -12,6 +13,17 @@ const port = 3000;
 
 app.use(express.json()); // Este middleware permite procesar el cuerpo de las solicitudes JSON
 
+const whitelist = ['http://localhost:8080'];
+const option = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido'));
+    }
+  },
+};
+app.use(cors());
 // Rutas generales
 app.get('/', (req, res) => {
   res.send('Hola, mi servidor en Express');
