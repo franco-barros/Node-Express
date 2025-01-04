@@ -1,6 +1,12 @@
 const express = require('express');
 const routerApi = require('./routes');
 
+const {
+  logErrors,
+  errorHandler,
+  boomErrorHandler,
+} = require('./middlewares/error.handler');
+
 const app = express();
 const port = 3000;
 
@@ -17,6 +23,11 @@ app.get('/nueva-ruta', (req, res) => {
 
 // Usar la función que define las rutas
 routerApi(app);
+
+//Middleware, es importante tener los middleware en su posicion indicada
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(errorHandler);
 
 // Arrancar el servidor
 app.listen(port, () => {

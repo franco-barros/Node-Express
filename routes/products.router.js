@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const ProductsService = require('./../service/product.service');
+const { errorHandler } = require('../middlewares/error.handler');
 const service = new ProductsService();
 
 // Ruta para obtener una lista de productos
@@ -18,10 +19,14 @@ router.get('/filter', (req, res) => {
 
 // Ruta para obtener un producto específico por su id
 
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const product = await service.findOne(id);
-  res.json(product);
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = await service.findOne(id);
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
 });
 
 //Metodo post
@@ -34,16 +39,14 @@ router.post('/', async (req, res) => {
 
 //Metodo patch
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
     const product = await service.update(id, body);
     res.json(product);
   } catch (error) {
-    res.status(404).json({
-      message: error.message,
-    });
+    next(error);
   }
 });
 
